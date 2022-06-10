@@ -21,12 +21,12 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="7e232" class="javax.swing.JLabel">
+          <component id="7e232" class="javax.swing.JLabel" binding="timeH">
             <constraints/>
             <properties>
-              <font name="Segoe UI Light" size="36" style="0"/>
+              <font name="Segoe UI Semilight" size="36" style="0"/>
               <foreground color="-1"/>
-              <text value="00"/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="6c7d7" class="javax.swing.JLabel">
@@ -37,10 +37,10 @@
               <text value=":"/>
             </properties>
           </component>
-          <component id="50cbe" class="javax.swing.JLabel">
+          <component id="50cbe" class="javax.swing.JLabel" binding="timeM">
             <constraints/>
             <properties>
-              <font name="Segoe UI Light" size="36" style="0"/>
+              <font name="Segoe UI Semilight" size="36" style="0"/>
               <foreground color="-1"/>
               <text value="00"/>
             </properties>
@@ -48,15 +48,15 @@
           <component id="7eba9" class="javax.swing.JLabel">
             <constraints/>
             <properties>
-              <font name="Segoe UI Light" size="36" style="1"/>
+              <font name="Segoe UI Semilight" size="36" style="1"/>
               <foreground color="-1"/>
               <text value=":"/>
             </properties>
           </component>
-          <component id="ebce2" class="javax.swing.JLabel">
+          <component id="ebce2" class="javax.swing.JLabel" binding="timeS">
             <constraints/>
             <properties>
-              <font name="Segoe UI Light" size="36" style="0"/>
+              <font name="Segoe UI" size="36" style="0"/>
               <foreground color="-1"/>
               <text value="00"/>
             </properties>
@@ -122,7 +122,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="25e4e" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+          <component id="25e4e" class="javax.swing.JComboBox" binding="resOff">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -132,7 +132,7 @@
               <enabled value="true"/>
               <focusCycleRoot value="false"/>
               <focusable value="true"/>
-              <font name="Segoe UI Light" size="14" style="0"/>
+              <font name="Segoe UI Semibold" size="14" style="0"/>
               <foreground color="-1"/>
               <lightWeightPopupEnabled value="true"/>
               <model>
@@ -144,13 +144,13 @@
               <verifyInputWhenFocusTarget value="true"/>
             </properties>
           </component>
-          <component id="abae3" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
+          <component id="abae3" class="javax.swing.JComboBox" binding="selected">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <background color="-11315592"/>
-              <font name="Segoe UI Light" size="14" style="0"/>
+              <font name="Segoe UI Semibold" size="14" style="0"/>
               <foreground color="-1"/>
               <model>
                 <item value="Select from the list"/>
@@ -165,13 +165,22 @@
           </component>
         </children>
       </grid>
-      <component id="996b1" class="javax.swing.JSlider" binding="slider1" default-binding="true">
+      <component id="996b1" class="javax.swing.JSlider" binding="sliderH">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-14276553"/>
           <foreground color="-1"/>
+          <maximum value="23"/>
+          <minimum value="0"/>
+          <paintLabels value="false"/>
+          <paintTicks value="false"/>
+          <paintTrack value="true"/>
+          <snapToTicks value="false"/>
+          <value value="0"/>
+          <valueIsAdjusting value="false"/>
+          <verifyInputWhenFocusTarget value="true"/>
         </properties>
       </component>
       <component id="9924e" class="javax.swing.JLabel">
@@ -185,13 +194,15 @@
           <text value="Hour"/>
         </properties>
       </component>
-      <component id="c0ec9" class="javax.swing.JSlider" binding="slider2" default-binding="true">
+      <component id="c0ec9" class="javax.swing.JSlider" binding="sliderM">
         <constraints>
           <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-14276553"/>
           <foreground color="-1"/>
+          <maximum value="59"/>
+          <value value="0"/>
         </properties>
       </component>
       <component id="75ca3" class="javax.swing.JLabel">

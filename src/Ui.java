@@ -2,29 +2,47 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+
 public class Ui extends JFrame {
     private JButton exit;
     private JButton iconFIed;
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
-    private JSlider slider1;
-    private JSlider slider2;
+    private JComboBox resOff;
+    private JComboBox selected;
+    private JSlider sliderH;
+    private JSlider sliderM;
     private JButton startButton;
     private JPanel generalPanel;
     private JPanel top;
+    private JLabel timeS;
+    private JLabel timeM;
+    private JLabel timeH;
+
+    private final Shutdown shutdown;
+    private Tray tray;
 
     private int px;
     private int py;
 
+    private Timer timer;
+
+    private int s;
+    private int m;
+    private int h;
+
+    private int trayInfo;
+
     public Ui() {
+        shutdown = new Shutdown();
+        tray = new Tray();
         setUndecorated(true);
-
         setVisible(true);
-        setSize(400, 350);
-
+        setSize(300, 290);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(generalPanel);
+
+        s = 59;
+
         exit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -39,9 +57,11 @@ public class Ui extends JFrame {
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                shutdown.shutdownCancel();
                 System.exit(0);
             }
         });
+
         iconFIed.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -53,11 +73,221 @@ public class Ui extends JFrame {
                 iconFIed.setBackground(new Color(38, 40, 55));
             }
         });
+
+        iconFIed.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                setVisible(false);
+            }
+        });
+
+        sliderH.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (!sliderH.isEnabled()) {
+                    timeH.setText(String.valueOf(h));
+                } else
+                    timeH.setText(String.valueOf(sliderH.getValue()));
+//                selected.setEnabled(false);
+            }
+        });
+
+        sliderH.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                if (!sliderH.isEnabled()) {
+                    timeH.setText(String.valueOf(h));
+                } else
+                    timeH.setText(String.valueOf(sliderH.getValue()));
+//                selected.setEnabled(false);
+            }
+        });
+
+        sliderM.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (!sliderM.isEnabled()) {
+                    timeM.setText(String.valueOf(m));
+                } else
+                    timeM.setText(String.valueOf(sliderM.getValue()));
+            }
+        });
+
+        sliderM.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                if (!sliderM.isEnabled()) {
+                    timeM.setText(String.valueOf(m));
+                } else
+                    timeM.setText(String.valueOf(sliderM.getValue()));
+            }
+        });
+//        selected.addActionListener(e -> {
+//            if (selected.getSelectedIndex() != 0) {
+//                sliderM.setEnabled(false);
+//                sliderH.setEnabled(false);
+//            } else {
+//                sliderM.setEnabled(true);
+//                sliderH.setEnabled(true);
+//            }
+//        });
+
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                startButton.setBackground(new Color(250, 128, 114));
-                startButton.setText("Stop");
+                if (startButton.isDefaultCapable()) {
+                    startButton.setDefaultCapable(false);
+                    startButton.setBackground(new Color(250, 128, 114));
+                    startButton.setText("Stop");
+
+                    if (resOff.getSelectedIndex() == 0) {
+                        switch (selected.getSelectedIndex()) {
+                            case 1:
+                                shutdown.shutdownOff(900);
+                                timeM.setText(String.valueOf(900 / 60));
+                                break;
+                            case 2:
+                                shutdown.shutdownOff(1800);
+                                timeM.setText(String.valueOf(1800 / 60));
+                                break;
+                            case 3:
+                                shutdown.shutdownOff(2700);
+                                timeM.setText(String.valueOf(2700 / 60));
+                                break;
+                            case 4:
+                                shutdown.shutdownOff(3600);
+                                timeM.setText(String.valueOf(3600 / 60));
+                                timeH.setText(String.valueOf(1));
+                                break;
+                            case 5:
+                                shutdown.shutdownOff(5400);
+                                timeM.setText(String.valueOf(1800 / 60));
+                                timeH.setText(String.valueOf(1));
+                                break;
+                            case 6:
+                                shutdown.shutdownOff(7200);
+                                timeM.setText(String.valueOf(3600 / 60));
+                                timeH.setText(String.valueOf(2));
+                                break;
+                            default:
+                                shutdown.shutdownOff(Integer.parseInt(timeH.getText()) * 60 * 60
+                                        + Integer.parseInt(timeM.getText()) * 60);
+                        }
+
+                    } else if (resOff.getSelectedIndex() == 1) {
+                        switch (selected.getSelectedIndex()) {
+                            case 1:
+                                shutdown.shutdownReset(900);
+                                timeM.setText(String.valueOf(900 / 60));
+                                break;
+                            case 2:
+                                shutdown.shutdownReset(1800);
+                                timeM.setText(String.valueOf(1800 / 60));
+                                break;
+                            case 3:
+                                shutdown.shutdownReset(2700);
+                                timeM.setText(String.valueOf(2700 / 60));
+                                break;
+                            case 4:
+                                shutdown.shutdownReset(3600);
+                                timeM.setText(String.valueOf(3600 / 60));
+                                break;
+                            case 5:
+                                shutdown.shutdownReset(5400);
+                                timeM.setText(String.valueOf(5400 / 60));
+                                break;
+                            case 6:
+                                shutdown.shutdownReset(7200);
+                                timeM.setText(String.valueOf(7200 / 60));
+                                break;
+                            default:
+                                shutdown.shutdownReset(Integer.parseInt(timeH.getText()) * 60 * 60
+                                        + Integer.parseInt(timeM.getText()) * 60);
+
+
+                        }
+
+                    }
+                    if (selected.getSelectedIndex() == 1 || selected.getSelectedIndex() == 2 || selected.getSelectedIndex() == 3) {
+                        timeH.setText(String.valueOf(0));
+
+                    }
+                    if (selected.getSelectedIndex() != 0) {
+                        sliderH.setValue(0);
+                        sliderM.setValue(0);
+                    }
+                    h = Integer.parseInt(timeH.getText());
+                    m = Integer.parseInt(timeM.getText());
+                    trayInfo = shutdown.getTime() / 60;
+
+                    if (m > 0) {
+                        m -= 1;
+                    } else if (m == 0) {
+                        m = 59;
+                    }
+                    if (m == 59) {
+                        h -= 1;
+                    }
+
+                    ActionListener taskPerformer = new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+
+                            timeS.setText(String.valueOf(s));
+                            timeM.setText(String.valueOf(m));
+                            timeH.setText(String.valueOf(h));
+                            s--;
+                            if (s < 0) {
+                                s = 59;
+                                m--;
+                            }
+                            if (m < 0) {
+                                m = 59;
+                                h--;
+                            }
+                            if (h < 0) {
+                                h = 0;
+                            }
+                            if (h == 0 && m == 4 && s == 58) {
+                                tray.trayIcon.displayMessage("Работа системы завершится через 5 минут",
+                                        null, TrayIcon.MessageType.WARNING);
+                            }
+                        }
+                    };
+                    timer = new Timer(1000, taskPerformer);
+                    timer.start();
+
+
+                    if (selected.getSelectedIndex() == 0 && sliderH.getValue() == 0 && sliderM.getValue() == 0) {
+                        timer.stop();
+                    }
+                    sliderH.setEnabled(false);
+                    sliderM.setEnabled(false);
+
+                    if (selected.getSelectedIndex() != 0 || sliderH.getValue() != 0 || sliderM.getValue() != 0) {
+                        tray.trayIcon.displayMessage("Выход из системы", "работа будет завершена через " + trayInfo + " минут",
+                                TrayIcon.MessageType.WARNING);
+                    }
+                } else {
+                    if (selected.getSelectedIndex() != 0 || sliderH.getValue() != 0 || sliderM.getValue() != 0) {
+                        tray.trayIcon.displayMessage("Выход из системы отменен", null, TrayIcon.MessageType.INFO);
+                    }
+                    startButton.setDefaultCapable(true);
+                    startButton.setBackground(new Color(94, 237, 181));
+                    startButton.setText("Start");
+                    shutdown.shutdownCancel();
+                    timer.stop();
+                    timeS.setText(String.valueOf(0) + String.valueOf(0));
+                    timeM.setText(String.valueOf(0) + String.valueOf(0));
+                    timeH.setText(String.valueOf(0));
+                    s = 59;
+                    selected.setSelectedIndex(0);
+                    sliderH.setEnabled(true);
+                    sliderM.setEnabled(true);
+                    sliderH.setValue(0);
+                    sliderM.setValue(0);
+
+                }
             }
         });
 
@@ -77,5 +307,26 @@ public class Ui extends JFrame {
                 setLocation(x - px, y - py);
             }
         });
+        tray.show.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(true);
+            }
+        });
+        tray.exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                shutdown.shutdownCancel();
+                System.exit(0);
+            }
+        });
+        tray.trayIcon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                setVisible(true);
+            }
+        });
+
     }
 }
+
