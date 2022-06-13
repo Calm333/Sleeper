@@ -91,7 +91,7 @@
           <component id="6f5a4" class="javax.swing.JButton" binding="exit">
             <constraints/>
             <properties>
-              <background color="-14276553"/>
+              <background color="-7667712"/>
               <borderPainted value="false"/>
               <contentAreaFilled value="true"/>
               <defaultCapable value="true"/>

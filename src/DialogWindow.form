@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="DialogWindow">
+  <grid id="cbd77" binding="contentPane" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="5" bottom="5" right="5"/>
+    <constraints>
+      <xy x="48" y="54" width="436" height="297"/>
+    </constraints>
+    <properties>
+      <background color="-14276553"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="b0848" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14276553"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="b1e26" layout-manager="GridBagLayout">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-14276553"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="288ec" class="javax.swing.JButton" binding="OK">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="0" left="0" bottom="0" right="25" weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <background color="-1443585"/>
+                  <borderPainted value="false"/>
+                  <focusPainted value="false"/>
+                  <foreground color="-16777216"/>
+                  <text value="OK"/>
+                </properties>
+              </component>
+              <component id="744e" class="javax.swing.JButton" binding="Cancel">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <background color="-1443585"/>
+                  <borderPainted value="false"/>
+                  <focusPainted value="false"/>
+                  <foreground color="-16777216"/>
+                  <text value="Cancel"/>
+                </properties>
+              </component>
+              <grid id="24e8a" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="25" right="0"/>
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <background color="-14276553"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="62c80" class="javax.swing.JLabel" binding="complete">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-12961715"/>
+                      <font name="Segoe UI Symbol" size="14" style="0"/>
+                      <foreground color="-1443585"/>
+                      <text value="End session now?"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <component id="2ff23" class="javax.swing.JButton" binding="exit">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-7667712"/>
+          <borderPainted value="false"/>
+          <focusPainted value="false"/>
+          <font name="DialogInput" size="14" style="0"/>
+          <foreground color="-1443585"/>
+          <text value="X"/>
+        </properties>
+      </component>
+      <component id="9132f" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14276553"/>
+          <font name="Segoe UI Symbol" size="16" style="0"/>
+          <foreground color="-1443585"/>
+          <text value="The session will end in 1 minute"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

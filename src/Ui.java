@@ -46,19 +46,19 @@ public class Ui extends JFrame {
         exit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                exit.setBackground(new Color(139, 0, 0));
+                exit.setBackground(new Color(175, 0, 0));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                exit.setBackground(new Color(38, 40, 55));
+                exit.setBackground(new Color(139, 0, 0));
             }
         });
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                shutdown.shutdownCancel();
                 System.exit(0);
+                shutdown.shutdownCancel();
             }
         });
 
@@ -249,11 +249,19 @@ public class Ui extends JFrame {
                                 h = 0;
                             }
                             if (h == 0 && m == 4 && s == 58) {
-                                tray.trayIcon.displayMessage("Работа системы завершится через 5 минут",
+                                tray.trayIcon.displayMessage("The system will shut down after 5 minutes",
                                         null, TrayIcon.MessageType.WARNING);
+                            }
+
+                            if (h == 0 && m == 0 && s == 58 && resOff.getSelectedIndex()==0) {
+                                new DialogWindow();
+
+                            }else if (h == 0 && m == 0 && s == 58 && resOff.getSelectedIndex()==1){
+                                new DialogWindowReload();
                             }
                         }
                     };
+
                     timer = new Timer(1000, taskPerformer);
                     timer.start();
 
@@ -265,12 +273,45 @@ public class Ui extends JFrame {
                     sliderM.setEnabled(false);
 
                     if (selected.getSelectedIndex() != 0 || sliderH.getValue() != 0 || sliderM.getValue() != 0) {
-                        tray.trayIcon.displayMessage("Выход из системы", "работа будет завершена через " + trayInfo + " минут",
+                        tray.trayIcon.displayMessage("Sign Out", "work will be completed in " + trayInfo + " minute",
                                 TrayIcon.MessageType.WARNING);
                     }
+
+                    sliderH.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            if (selected.getSelectedIndex() == 0 && sliderH.getValue() == 0 && sliderM.getValue() == 0)
+                                timeH.setText(String.valueOf(0));
+                        }
+                    });
+
+                    sliderH.addMouseMotionListener(new MouseMotionAdapter() {
+                        @Override
+                        public void mouseDragged(MouseEvent e) {
+                            if (selected.getSelectedIndex() == 0 && sliderH.getValue() == 0 && sliderM.getValue() == 0)
+                                timeH.setText(String.valueOf(0));
+                        }
+                    });
+
+                    sliderM.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            if (selected.getSelectedIndex() == 0 && sliderH.getValue() == 0 && sliderM.getValue() == 0)
+                                timeM.setText(String.valueOf(0) + String.valueOf(0));
+                        }
+                    });
+
+                    sliderM.addMouseMotionListener(new MouseMotionAdapter() {
+                        @Override
+                        public void mouseDragged(MouseEvent e) {
+                            if (selected.getSelectedIndex() == 0 && sliderH.getValue() == 0 && sliderM.getValue() == 0)
+                                timeM.setText(String.valueOf(0) + String.valueOf(0));
+                        }
+                    });
+
                 } else {
                     if (selected.getSelectedIndex() != 0 || sliderH.getValue() != 0 || sliderM.getValue() != 0) {
-                        tray.trayIcon.displayMessage("Выход из системы отменен", null, TrayIcon.MessageType.INFO);
+                        tray.trayIcon.displayMessage("Logout canceled", null, TrayIcon.MessageType.INFO);
                     }
                     startButton.setDefaultCapable(true);
                     startButton.setBackground(new Color(94, 237, 181));
@@ -286,7 +327,7 @@ public class Ui extends JFrame {
                     sliderM.setEnabled(true);
                     sliderH.setValue(0);
                     sliderM.setValue(0);
-
+                    shutdown.shutdownCancel();
                 }
             }
         });
